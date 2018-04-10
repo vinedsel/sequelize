@@ -5,7 +5,7 @@ const handlebars = require("express-handlebars").create({ defaultLayout: 'main' 
 
 const sequelize = new Sequelize('database', 'username', 'password', {
   host: 'localhost',
-  dialect: 'mysql'|'sqlite'|'postgres'|'mssql',
+  dialect: 'sqlite',
   storage: "./Chinook_Sqlite_AutoIncrementPKs.sqlite"
 });
 
@@ -17,9 +17,25 @@ app.use(require("body-parser")());
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
+const Artist = sequelize.define(
+  "Artist",
+  {
+    ArtistId: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    Name: Sequelize.STRING
+  },
+  {
+    freezeTableName: true,
+    timestamps: false
+  }
+);
 
-
-
+Artist.find({ where: { ArtistId: 75 } }).then(artists => {
+  console.log(JSON.stringify(artists));
+});
 
 
 
