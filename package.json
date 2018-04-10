@@ -1,0 +1,19 @@
+{
+  "name": "sequelize",
+  "version": "1.0.0",
+  "description": "Project for learning ORM.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinedsel/sequelize.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinedsel/sequelize/issues"
+  },
+  "homepage": "https://github.com/vinedsel/sequelize#readme"
+}
