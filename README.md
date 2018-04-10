@@ -1,2 +1,2 @@
-# sequelize
+# sqlize
 Project for learning ORM.
