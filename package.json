@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/vinedsel/sqlize#readme",
   "dependencies": {
-    "sequelize": "^4.37.6"
+    "sequelize": "^4.37.6",
+    "sqlite3": "^4.0.0"
   }
 }
