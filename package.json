@@ -1,5 +1,5 @@
 {
-  "name": "sequelize",
+  "name": "sqlize",
   "version": "1.0.0",
   "description": "Project for learning ORM.",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vinedsel/sequelize.git"
+    "url": "git+https://github.com/vinedsel/sqlize.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vinedsel/sequelize/issues"
+    "url": "https://github.com/vinedsel/sqlize/issues"
   },
-  "homepage": "https://github.com/vinedsel/sequelize#readme"
+  "homepage": "https://github.com/vinedsel/sqlize#readme"
 }
