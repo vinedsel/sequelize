@@ -21,18 +21,6 @@ app.set('view engine', 'handlebars');
 
 
 
-// app.get('/view', (req, res) => {
-//     const query = `SELECT Artist.Name as Artist, Album.Title as Album FROM Artist JOIN Album WHERE Artist.ArtistId=Album.ArtistId LIMIT 1000`;
-//     let resultsArray = [];
-//     db.each(query, (err, row) => {
-//         if (err) throw err;
-//         // console.log(row);
-//         resultsArray.push(row);
-//       });
-//     res.render('view', {results: resultsArray});
-// });
-
-
 const Artist = sequelize.define(
   "Artist", {
     ArtistId: {
@@ -59,6 +47,23 @@ const Album = sequelize.define(
     timestamps: false
   });
 
+app.get('/view', (req, res) => {
+  const query = `SELECT Artist.Name as Artist, Album.Title as Album FROM Artist JOIN Album WHERE Artist.ArtistId=Album.ArtistId LIMIT 1000`;
+  let resultsArray = [];
+  app.get('/artist', (req, res) => {
+    Artist.findAll().then(artists => {
+      res.json(artists);
+    });
+  });
+  db.each(query, (err, row) => {
+    if (err) throw err;
+    // console.log(row);
+    resultsArray.push(row);
+  });
+  res.render('view', {
+    results: resultsArray
+  });
+});
 
 
 app.listen(process.env.PORT || 3000, () => {
