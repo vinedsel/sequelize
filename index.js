@@ -5,7 +5,7 @@ const handlebars = require("express-handlebars").create({
   defaultLayout: 'main'
 });
 
-const sequelize = new Sequelize('database', 'username', 'password', {
+const sequelize = new Sequelize('database', 'username', null, {
   host: 'localhost',
   dialect: 'sqlite',
   storage: "./Chinook_Sqlite_AutoIncrementPKs.sqlite"
@@ -39,7 +39,7 @@ const Album = sequelize.define(
     ArtistId: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
-      primaryKey: false
+      primaryKey: true
     },
     Title: Sequelize.STRING
   }, {
@@ -47,23 +47,33 @@ const Album = sequelize.define(
     timestamps: false
   });
 
-app.get('/view', (req, res) => {
-  const query = `SELECT Artist.Name as Artist, Album.Title as Album FROM Artist JOIN Album WHERE Artist.ArtistId=Album.ArtistId LIMIT 1000`;
-  let resultsArray = [];
-  app.get('/artist', (req, res) => {
-    Artist.findAll().then(artists => {
-      res.json(artists);
+// app.get('/view', (req, res) => {
+//   const query = `SELECT Artist.Name as Artist, Album.Title as Album FROM Artist JOIN Album WHERE Artist.ArtistId=Album.ArtistId LIMIT 1000`;
+//   let resultsArray = [];
+
+
+Artist.hasMany(Album, {foreignKey: 'ArtistId'});
+Album.belongsTo(Artist, {foreignKey: 'ArtistId'});
+  app.get('/', (req, res) => {
+    Album.findAll({
+        include: [
+            {
+                model: Artist
+            }
+        ]
+    }).then(albums => {
+        res.render('view', {results: albums})
     });
-  });
-  db.each(query, (err, row) => {
-    if (err) throw err;
-    // console.log(row);
-    resultsArray.push(row);
-  });
-  res.render('view', {
-    results: resultsArray
-  });
 });
+//   db.each(query, (err, row) => {
+//     if (err) throw err;
+//     // console.log(row);
+//     resultsArray.push(row);
+//   });
+//   res.render('view', {
+//     results: resultsArray
+//   });
+// });
 
 
 app.listen(process.env.PORT || 3000, () => {
